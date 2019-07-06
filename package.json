@@ -4,7 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "test": "jest",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "prettier:check": "prettier -c 'examples/**/*.js'",
+    "prettier:fix": "prettier --write 'examples/**/*.js'"
   },
   "keywords": [],
   "author": "",
@@ -12,6 +17,7 @@
   "devDependencies": {
     "eslint": "^6.0.1",
     "eslint-plugin-node": "^9.1.0",
-    "jest": "^24.8.0"
+    "jest": "^24.8.0",
+    "prettier": "^1.18.2"
   }
 }
