@@ -17,7 +17,7 @@ npm install
 
 ## Como usar / How to use
 
-Todos exemplos incluem testes, para executar os testes pasta executar o comando abaixo:
+Todos exemplos incluem testes, para executar os testes basta executar o comando abaixo:
 
 All examples have tests, in order to execute them just run the command below:
 
