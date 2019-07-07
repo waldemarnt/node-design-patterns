@@ -1,4 +1,6 @@
 # Node js Design Patterns
+[![Build Status](https://travis-ci.org/waldemarnt/node-design-patterns.svg?branch=master)](https://travis-ci.org/waldemarnt/node-design-patterns)
+
 Official repository of my Node.js Design Patterns youtube serie
 
 **pt-br**
