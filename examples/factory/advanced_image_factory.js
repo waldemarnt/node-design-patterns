@@ -26,5 +26,5 @@ function createImage(type) {
 // The Image class is being exported here just for test purposes
 module.exports = {
   createImage,
-  Image
+  Image,
 };

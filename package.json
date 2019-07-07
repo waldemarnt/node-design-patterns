@@ -9,7 +9,8 @@
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "prettier:check": "prettier -c 'examples/**/*.js'",
-    "prettier:fix": "prettier --write 'examples/**/*.js'"
+    "prettier:fix": "prettier --write 'examples/**/*.js'",
+    "ci": "npm run lint && npm run prettier:check && npm test"
   },
   "keywords": [],
   "author": "",
