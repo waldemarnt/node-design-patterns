@@ -1,8 +1,8 @@
 class Image {}
 
 /**
- * Simple factory example just a function that constructs and object
- * and return it.
+ * Simple factory example is just a function that constructs an object
+ * and returns it.
  */
 function createImage(type) {
   return new Image(type);
