@@ -1,10 +1,10 @@
-class DefaultImage {}
+class Image {}
 
-class PNGImage {}
+class PNGImage extends Image {}
 
-class JPGImage {}
+class JPGImage extends Image {}
 
-class GIFImage {}
+class GIFImage extends Image {}
 
 /**
  * More complex Factory example where a class is created based on a dynamic value
@@ -20,14 +20,11 @@ function createImage(type) {
    * it replaces the need of using a switch statement or a bunch of if/elses.
    * See more at https://ponyfoo.com/articles/es6-object-literal-features-in-depth
    */
-  return new (supportedImageTypes[type] || DefaultImage)();
+  return new (supportedImageTypes[type] || Image)();
 }
 
-// All classes are being exported here just for test purposes
+// The Image class is being exported here just for test purposes
 module.exports = {
   createImage,
-  DefaultImage,
-  PNGImage,
-  JPGImage,
-  GIFImage,
+  Image
 };
