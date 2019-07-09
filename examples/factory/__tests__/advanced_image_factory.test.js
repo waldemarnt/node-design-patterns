@@ -1,4 +1,4 @@
-const { createImage, Image } = require('../advanced_image_factory');
+const { createImage, Image, PNGImage, JPGImage, GIFImage } = require('../advanced_image_factory');
 
 describe('Advanced Image Factory', () => {
   it('should create an instance of Image given the type is not supported', () => {
@@ -8,16 +8,16 @@ describe('Advanced Image Factory', () => {
 
   it('should create an instance of JPG given the type is jpg', () => {
     const ImageInstance = createImage('jpg');
-    expect(ImageInstance).toBeInstanceOf(Image);
+    expect(ImageInstance).toBeInstanceOf(JPGImage);
   });
 
   it('should create an instance of GIF given the type is gif', () => {
     const ImageInstance = createImage('gif');
-    expect(ImageInstance).toBeInstanceOf(Image);
+    expect(ImageInstance).toBeInstanceOf(GIFImage);
   });
 
   it('should create an instance of PNG given the type is png', () => {
     const ImageInstance = createImage('png');
-    expect(ImageInstance).toBeInstanceOf(Image);
+    expect(ImageInstance).toBeInstanceOf(PNGImage);
   });
 });

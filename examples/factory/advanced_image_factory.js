@@ -27,4 +27,7 @@ function createImage(type) {
 module.exports = {
   createImage,
   Image,
+  PNGImage,
+  JPGImage,
+  GIFImage,
 };
