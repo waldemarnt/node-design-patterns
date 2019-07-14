@@ -1,26 +1,17 @@
+const DataPipeline = require('./data_pipeline');
+
 class MiddlewareManager {
   constructor() {
     this.middlewares = [];
   }
 
   process(data) {
-    if (this.middlewares.length > 0) {
-      const firstMiddleware = this.middlewares.pop();
-      const next = () => {
-        if (this.middlewares.length > 0) {
-          const nextMiddleware = this.middlewares.pop();
-          nextMiddleware(data, next);
-        } else {
-          data.end();
-        }
-      };
-      firstMiddleware(data, next);
-    }
-    return true;
+    const dataPipeline = new DataPipeline(this.middlewares, data);
+    dataPipeline.dispatch();
   }
 
   use(middleware) {
-    this.middlewares.unshift(middleware);
+    this.middlewares.push(middleware);
   }
 }
 
