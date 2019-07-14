@@ -33,4 +33,29 @@ describe('MiddlewareManager', () => {
     middlewareManager.use(expectMiddleware);
     middlewareManager.process(defaultData);
   });
+
+  it('should process finish the pipeline when done is called', () => {
+    let middlewareCalled = false;
+    /**
+     * Add a middleware after the expectMiddleware
+     * just to make it clear that the chain is stopping
+     * right after the end is called
+     */
+    const testOrderMiddleware = function() {
+      middlewareCalled = true;
+    };
+    const expectMiddleware = function(data) {
+      /**
+       * similar to res.send on express
+       */
+      data.end();
+      expect(data.user.firstName).toBe('Jhon');
+      expect(middlewareCalled).toBe(false);
+    };
+
+    middlewareManager.use(expectMiddleware);
+    middlewareManager.use(testOrderMiddleware);
+    middlewareManager.use(logMiddleware);
+    middlewareManager.process(defaultData);
+  });
 });

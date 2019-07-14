@@ -5,7 +5,7 @@ class MiddlewareManager {
     this.middlewares = [];
   }
 
-  process(data) {
+  process(data = {}) {
     const dataPipeline = new DataPipeline(this.middlewares, data);
     dataPipeline.dispatch();
   }

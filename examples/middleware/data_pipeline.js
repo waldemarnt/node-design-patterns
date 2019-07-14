@@ -1,10 +1,14 @@
 class DataPipeline {
   constructor(middlewares, data) {
     this.middlewares = middlewares;
+    this.finished = false;
     /**
      * Adds a static end function to the data object
      */
-    data.end = function() {};
+    data.end = () => {
+      console.log('Pipeline has ended');
+      this.finished = true;
+    };
     this.data = data;
   }
 
@@ -22,7 +26,7 @@ class DataPipeline {
        * injecting for the next middleware
        */
       const next = () => {
-        if (iterator < this.middlewares.length) {
+        if (!this.finished && iterator < this.middlewares.length) {
           const nextMiddleware = this.middlewares[iterator++];
           nextMiddleware(this.data, next);
         } else {
