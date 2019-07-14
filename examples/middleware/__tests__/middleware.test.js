@@ -5,7 +5,7 @@ describe('MiddlewareManager', () => {
    * One middlewareManager instance can run multiple pipilines
    */
   const middlewareManager = new MiddlewareManager();
-  const logMiddleware = function(data, next) {
+  const logMiddleware = (data, next) => {
     console.log('logMiddleware', data.user);
     next();
   };
@@ -20,11 +20,11 @@ describe('MiddlewareManager', () => {
   });
 
   it('should process all middlewares in order before reaching the end', () => {
-    const nameEnchancerMiddleware = function(data, next) {
+    const nameEnchancerMiddleware = (data, next) => {
       data.user.firstName = data.user.name.split(' ')[0];
       next();
     };
-    const expectMiddleware = function(data, next) {
+    const expectMiddleware = (data, next) => {
       expect(data.user.firstName).toBe('Jhon');
       next();
     };
@@ -41,10 +41,10 @@ describe('MiddlewareManager', () => {
      * just to make it clear that the chain is stopping
      * right after the end is called
      */
-    const testOrderMiddleware = function() {
+    const testOrderMiddleware = () => {
       middlewareCalled = true;
     };
-    const expectMiddleware = function(data) {
+    const expectMiddleware = data => {
       /**
        * similar to res.send on express
        */
