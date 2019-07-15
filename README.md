@@ -29,6 +29,7 @@ npm test
 
 ## Patterns
 [Factory](examples/factory)
+[Middleware](examples/middleware)
 
 ## Contribuindo / Contributing
 Pull requests são bem vindos. Para grandes mudanças abra uma issue antes para discutirmos.
