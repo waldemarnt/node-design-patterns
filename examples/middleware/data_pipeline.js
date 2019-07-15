@@ -28,9 +28,10 @@ class DataPipeline {
        * injecting for the next middleware
        */
       const next = () => {
+        iterator++;
         if (!this.finished && iterator < this.middlewares.length) {
           //Increases the iterator and get the next middleware
-          const nextMiddleware = this.middlewares[iterator++];
+          const nextMiddleware = this.middlewares[iterator];
           nextMiddleware(this.data, next);
         } else {
           this.data.end();
