@@ -20,7 +20,7 @@ describe('MiddlewareManager', () => {
   });
 
   it('should process all middlewares in order before reaching the end', () => {
-    const nameEnchancerMiddleware = (data, next) => {
+    const nameEnhanceMiddleware = (data, next) => {
       data.user.firstName = data.user.name.split(' ')[0];
       next();
     };
@@ -29,7 +29,7 @@ describe('MiddlewareManager', () => {
       next();
     };
     middlewareManager.use(logMiddleware);
-    middlewareManager.use(nameEnchancerMiddleware);
+    middlewareManager.use(nameEnhanceMiddleware);
     middlewareManager.use(expectMiddleware);
     middlewareManager.process(defaultData);
   });
