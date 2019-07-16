@@ -29,6 +29,7 @@ npm test
 
 ## Patterns
 [Factory](examples/factory)
+
 [Middleware](examples/middleware)
 
 ## Contribuindo / Contributing
