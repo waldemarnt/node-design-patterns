@@ -1,62 +1,64 @@
 const NPromise = require('../new_promise');
 
 describe('Promise', () => {
-  it('should then a Promise', done => {
-    return new NPromise(resolve => resolve({ data: 'fake' })).then(response => {
-      expect(response.data).toBe('fake');
-      done();
-    });
-  });
-
-  it('should call then just when the async code is resolved', done => {
-    return new NPromise(resolve => {
-      setTimeout(() => resolve({ data: 'fake' }), 10);
-    }).then(response => {
-      expect(response.data).toBe('fake');
-      done();
-    });
-  });
-
-  it('should support a chain of promises', done => {
-    return new NPromise(resolve => {
-      setTimeout(() => resolve({ data: 'promise1' }), 10);
-    })
-      .then(response => {
-        expect(response.data).toBe('promise1');
-        return { data: 'promise2' };
-      })
-      .then(response => {
-        expect(response.data).toBe('promise2');
+  describe('When fulfilled', () => {
+    it('should then a Promise', done => {
+      return new NPromise(resolve => resolve({ data: 'fake' })).then(response => {
+        expect(response.data).toBe('fake');
         done();
       });
-  });
-
-  it('should allow the same promise to be thenable multiple times', done => {
-    const p1 = new NPromise(resolve => setTimeout(() => resolve({ data: 'fake' }), 10));
-
-    p1.then(response => {
-      expect(response.data).toBe('fake');
     });
 
-    p1.then(response => {
-      expect(response.data).toBe('fake');
-      done();
-    });
-  });
-
-  it('should support chain of promises on which promises are returned', done => {
-    const fakeFSPromise = new Promise(resolve => setTimeout(() => resolve({ file: 'photo.jpg' }), 10));
-    return new NPromise(resolve => {
-      setTimeout(() => resolve({ data: 'promise1' }), 10);
-    })
-      .then(response => {
-        expect(response.data).toBe('promise1');
-        return fakeFSPromise;
-      })
-      .then(response => {
-        expect(response.file).toBe('photo.jpg');
+    it('should call then just when the async code is resolved', done => {
+      return new NPromise(resolve => {
+        setTimeout(() => resolve({ data: 'fake' }), 10);
+      }).then(response => {
+        expect(response.data).toBe('fake');
         done();
       });
+    });
+
+    it('should support a chain of promises', done => {
+      return new NPromise(resolve => {
+        setTimeout(() => resolve({ data: 'promise1' }), 10);
+      })
+        .then(response => {
+          expect(response.data).toBe('promise1');
+          return { data: 'promise2' };
+        })
+        .then(response => {
+          expect(response.data).toBe('promise2');
+          done();
+        });
+    });
+
+    it('should allow the same promise to be thenable multiple times', done => {
+      const p1 = new NPromise(resolve => setTimeout(() => resolve({ data: 'fake' }), 10));
+
+      p1.then(response => {
+        expect(response.data).toBe('fake');
+      });
+
+      p1.then(response => {
+        expect(response.data).toBe('fake');
+        done();
+      });
+    });
+
+    it('should support chain of promises on which promises are returned', done => {
+      const fakeFSPromise = new Promise(resolve => setTimeout(() => resolve({ file: 'photo.jpg' }), 10));
+      return new NPromise(resolve => {
+        setTimeout(() => resolve({ data: 'promise1' }), 10);
+      })
+        .then(response => {
+          expect(response.data).toBe('promise1');
+          return fakeFSPromise;
+        })
+        .then(response => {
+          expect(response.file).toBe('photo.jpg');
+          done();
+        });
+    });
   });
 
   describe('Error handling', () => {
