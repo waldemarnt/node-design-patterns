@@ -8,12 +8,6 @@ describe('Promise', () => {
   });
 
   describe('When fulfilled', () => {
-    it('should resolve a Promise syncronously with a given value', () => {
-      const promise = new NPromise(resolve => resolve({ data: 'fake' }));
-      expect(promise.state).toBe('fulfilled');
-      expect(promise.value).toStrictEqual({ data: 'fake' });
-    });
-
     it('should create a Promise with the state pending and undefined value for an async operation', () => {
       const promise = new NPromise(resolve => setTimeout(() => resolve({ data: 'fake' })), 10);
       expect(promise.state).toBe('pending');

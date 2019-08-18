@@ -24,6 +24,8 @@ class NPromise {
      * Call(executor, undefined, «resolvingFunctions.[[Resolve]], resolvingFunctions.[[Reject]]»).
      * It calls executor function passing the
      * resolve and reject parameters to the promise itself
+     * NOTE: process.nextTick can be added ir order to allow async execution
+     * process.nextTick(() => executor(this.resolve.bind(this), this.reject.bind(this)));
      */
     executor(this.resolve.bind(this), this.reject.bind(this));
   }
