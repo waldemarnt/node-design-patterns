@@ -74,7 +74,7 @@ class NPromise {
        * put it in an array to be resolved afterwards
        */
       if (this.state === STATE.REJECTED) {
-        onReject(this.value);
+        onRejected(this.value);
       } else {
         this.onRejectCallChain.push(onRejected);
       }
