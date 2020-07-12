@@ -101,6 +101,36 @@ describe('Promise', () => {
         });
     });
 
+    it('should allow catch after a then with sync resolved promise', done => {
+      const errorMessage = 'Promise has been rejected';
+      const thenFn = jest.fn();
+
+      return new NPromise((resolve, reject) => {
+        return reject(new Error(errorMessage));
+      })
+        .then(thenFn)
+        .catch(error => {
+          expect(error.message).toBe(errorMessage);
+          expect(thenFn).toHaveBeenCalledTimes(0);
+          done();
+        });
+    });
+
+    it('should allow catch after a then with async resolved promise', done => {
+      const errorMessage = 'Promise has been rejected';
+      const thenFn = jest.fn();
+
+      return new NPromise((resolve, reject) => {
+        setTimeout(() => reject(new Error(errorMessage)), 10);
+      })
+        .then(thenFn)
+        .catch(error => {
+          expect(error.message).toBe(errorMessage);
+          expect(thenFn).toHaveBeenCalledTimes(0);
+          done();
+        });
+    });
+
     it('should allow catch an error thrown by a previous catch method', done => {
       const errorMessage = 'Promise has been rejected';
 

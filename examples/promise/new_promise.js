@@ -34,9 +34,13 @@ class NPromise {
     /**
      * A Promise always return a new Promise
      */
-    return new NPromise(resolve => {
+    return new NPromise((resolve, reject) => {
       const onFulfilled = res => {
         resolve(onFulfill(res));
+      };
+
+      const onRejected = res => {
+        reject(res);
       };
       /**
        * If then was called from an already fulfilled promise
@@ -44,13 +48,19 @@ class NPromise {
        */
       if (this.state === STATE.FULFILLED) {
         onFulfilled(this.value);
+      } else if (this.state == STATE.REJECTED) {
+        /**
+         * If it was called from a rejected promise
+         * it doens't need to wait and should be rejected straight
+         */
+        onRejected(this.value);
       } else {
         /**
          * If the promise before this is in PENDING
-         * the fulfill callback will be pushed to a list
+         * the fulfill/reject callback will be pushed to a list
          * to be resolved afterwards
          */
-        this.onFulfillChain.push({ onFulfilled });
+        this.onFulfillChain.push({ onFulfilled, onRejected });
       }
     });
   }
@@ -135,6 +145,13 @@ class NPromise {
      * call all the catchs for a given Promise
      */
     for (const onRejected of this.onRejectCallChain) {
+      onRejected(error);
+    }
+
+    /**
+     * Rejects the all thens for a given Promise
+     */
+    for (const { onRejected } of this.onFulfillChain) {
       onRejected(error);
     }
   }

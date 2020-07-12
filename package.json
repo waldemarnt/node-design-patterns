@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "test": "jest",
+    "test:promise": "jest /examples/promise",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "prettier:check": "prettier -c 'examples/**/*.js'",
